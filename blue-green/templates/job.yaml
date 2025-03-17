@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: check-rollout-status
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  template:
+    spec:
+      containers:
+        - name: check-rollout
+          image: bitnami/kubectl:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              until kubectl rollout status rollout/example-deployment-rollout; do
+                echo "Waiting for rollout to complete..."
+                sleep 5
+              done
+              echo "Rollout completed successfully."
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "128Mi"
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+      restartPolicy: Never
+  backoffLimit: 4

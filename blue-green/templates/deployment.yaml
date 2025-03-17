@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   annotations:
     # By default, the sync wave is 0, we need to set it to 1 to ensure that this resource is sync at last.
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "2"
   name: example-deployment-2
   labels:
     app: example-app-2
@@ -19,6 +19,6 @@ spec:
     spec:
       containers:
         - name: example-container
-          image: nginx:1.19.4
+          image: nginx:1.19.3
           ports:
             - containerPort: 80
