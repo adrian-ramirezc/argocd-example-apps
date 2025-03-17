@@ -9,7 +9,7 @@ metadata:
     app: example-app-2
 spec:
   replicas: 6
-  revisionHistoryLimit: 3
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       app: example-app-2
