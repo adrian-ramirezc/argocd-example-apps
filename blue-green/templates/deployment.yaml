@@ -1,33 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "helm-guestbook.fullname" . }}
+  name: example-deployment-2
   labels:
-    app: {{ template "helm-guestbook.name" . }}
-    chart: {{ template "helm-guestbook.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    app: example-app-2
 spec:
-  replicas: 5
+  replicas: 3
   selector:
-      matchLabels:
-        app: {{ template "helm-guestbook.name" . }}
-        chart: {{ template "helm-guestbook.chart" . }}
-        release: {{ .Release.Name }}
-        heritage: {{ .Release.Service }}
-  containers:
-    - name: {{ .Chart.Name }}
-      image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-      imagePullPolicy: {{ .Values.image.pullPolicy }}
-      ports:
-        - name: http
-          containerPort: 80
-          protocol: TCP
-      livenessProbe:
-        httpGet:
-          path: /
-          port: http
-      readinessProbe:
-        httpGet:
-          path: /
-          port: http
+    matchLabels:
+      app: example-app-2
+  template:
+    metadata:
+      labels:
+        app: example-app-2
+    spec:
+      containers:
+        - name: example-container
+          image: nginx:1.19.4
+          ports:
+            - containerPort: 80

@@ -1,26 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: {{ template "helm-guestbook.fullname" . }}
+  name: example-deployment-rollout-2
   labels:
-    app: {{ template "helm-guestbook.name" . }}
-    chart: {{ template "helm-guestbook.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    app: example-app-2
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 3
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: {{ template "helm-guestbook.name" . }}
-      release: {{ .Release.Name }}
+      app: example-app-2
   strategy:
     canary:
       steps:
         - setWeight: 20
-        - pause: { duration: 30s }
+        - pause: {duration: 30s}
   workloadRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ template "helm-guestbook.fullname" . }}
+    name: example-deployment-2
     scaleDown: onsuccess
