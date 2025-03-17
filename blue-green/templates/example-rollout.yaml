@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: example-deployment-rollout
+  labels:
+    app: example-app
+spec:
+  replicas: 3
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: example-app
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: {duration: 30s}
+  workloadRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: example-deployment
+    scaleDown: onsuccess
