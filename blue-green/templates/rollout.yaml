@@ -8,7 +8,7 @@ metadata:
   labels:
     app: example-app-2
 spec:
-  replicas: 6
+  replicas: 5
   revisionHistoryLimit: 0
   selector:
     matchLabels:
@@ -17,7 +17,7 @@ spec:
     canary:
       steps:
         - setWeight: 20
-        - pause: {duration: 30s}
+        - pause: {duration: 2s}
   workloadRef:
     apiVersion: apps/v1
     kind: Deployment
