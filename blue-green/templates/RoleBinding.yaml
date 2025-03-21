@@ -5,7 +5,7 @@ metadata:
   namespace: blue-green
 subjects:
   - kind: ServiceAccount
-    name: default
+    name: rollout-status-checker-sa
     namespace: blue-green
 roleRef:
   kind: Role
