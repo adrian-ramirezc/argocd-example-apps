@@ -15,8 +15,23 @@ spec:
     canary:
       steps:
         - setWeight: 20
-        - pause: {duration: 5s}
-        - setWeight: 150 # Failure on purpose
+        - experiment:
+            templates:
+              - name: baseline
+                specRef: stable
+              - name: canary
+                specRef: canary
+            analyses:
+              - name: compare-nats-metrics
+                templateName: skube-nats-processor-comparison
+                clusterScope: false
+                requiredForCompletion: true
+                args:
+                  - name: app-name
+                    value: "oms-eda-offer-consolidate"
+                  - name: canary
+                    value: "dfgf"
+        - setWeight: 100
   workloadRef:
     apiVersion: apps/v1
     kind: Deployment
