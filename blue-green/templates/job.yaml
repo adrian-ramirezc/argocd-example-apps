@@ -8,6 +8,7 @@ metadata:
 spec:
   template:
     spec:
+      serviceAccountName: rollouts-status-checker-sa
       containers:
         - name: check-rollout
           image: localhost/kubectl:latest
