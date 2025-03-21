@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: rollout-status-checker
-  namespace: default
+  namespace: blue-green
 rules:
   - apiGroups: ["argoproj.io"]
     resources: ["rollouts"]

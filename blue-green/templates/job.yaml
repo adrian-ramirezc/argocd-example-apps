@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: check-rollout-status
+  namespace: blue-green
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
@@ -9,7 +10,8 @@ spec:
     spec:
       containers:
         - name: check-rollout
-          image: bitnami/kubectl:latest
+          image: localhost/kubectl:latest
+          imagePullPolicy: IfNotPresent
           command:
             - /bin/sh
             - -c
