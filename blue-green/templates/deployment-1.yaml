@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: blue-green
-  name: example-deployment
+  name: deployment-1
   labels:
     app: example-app
 spec:

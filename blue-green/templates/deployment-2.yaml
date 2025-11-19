@@ -5,7 +5,7 @@ metadata:
   annotations:
     # By default, the sync wave is 0, we need to set it to 1 to ensure that this resource is sync at last.
     argocd.argoproj.io/sync-wave: "2"
-  name: example-deployment-2
+  name: deployment-2
   labels:
     app: example-app-2
 spec:

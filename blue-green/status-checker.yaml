@@ -17,7 +17,7 @@ spec:
             - /bin/sh
             - -c
             - |
-              until kubectl get rollout example-deployment-rollout -n blue-green -o jsonpath='{.status.phase}' | grep -q 'Healthy'; do
+              until kubectl get rollout rollout-1 -n blue-green -o jsonpath='{.status.phase}' | grep -q 'Healthy'; do
                 echo "Waiting for rollout to complete..."
                 sleep 5
               done

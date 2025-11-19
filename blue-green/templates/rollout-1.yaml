@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   namespace: blue-green
-  name: example-deployment-rollout
+  name: rollout-1
   labels:
     app: example-app
 spec:
@@ -35,5 +35,5 @@ spec:
   workloadRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: example-deployment
+    name: deployment-1
     scaleDown: onsuccess
