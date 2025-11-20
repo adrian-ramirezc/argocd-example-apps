@@ -4,19 +4,19 @@ metadata:
   namespace: blue-green
   name: deployment-1
   labels:
-    app: example-app
+    app: deployment-1
 spec:
   replicas: 0
   selector:
     matchLabels:
-      app: example-app
+      app: deployment-1
   template:
     metadata:
       labels:
-        app: example-app
+        app: deployment-1
     spec:
       containers:
         - name: example-container
-          image: nginx:1.19.3
+          image: nginx:1.19.4
           ports:
             - containerPort: 80

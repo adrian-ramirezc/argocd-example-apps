@@ -4,13 +4,13 @@ metadata:
   namespace: blue-green
   name: rollout-1
   labels:
-    app: example-app
+    app: deployment-1
 spec:
   replicas: 10
   revisionHistoryLimit: 0
   selector:
     matchLabels:
-      app: example-app
+      app: deployment-1
   strategy:
     canary:
       steps:
@@ -22,15 +22,15 @@ spec:
               - name: canary
                 specRef: canary
             analyses:
-              - name: compare-nats-metrics
-                templateName: skube-nats-processor-comparison
+              - name: should-fail
+                templateName: non-existing-template
                 clusterScope: false
                 requiredForCompletion: true
                 args:
                   - name: app-name
-                    value: "oms-eda-offer-consolidate"
+                    value: "deployment-1"
                   - name: canary
-                    value: "dfgf"
+                    value: "some-value"
         - setWeight: 100
   workloadRef:
     apiVersion: apps/v1

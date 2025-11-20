@@ -7,19 +7,19 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
   name: deployment-2
   labels:
-    app: example-app-2
+    app: deployment-2
 spec:
   replicas: 0
   selector:
     matchLabels:
-      app: example-app-2
+      app: deployment-2
   template:
     metadata:
       labels:
-        app: example-app-2
+        app: deployment-2
     spec:
       containers:
         - name: example-container
-          image: nginx:1.19.4
+          image: nginx:1.19.3
           ports:
             - containerPort: 80
