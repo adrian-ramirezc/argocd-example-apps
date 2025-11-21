@@ -5,6 +5,7 @@ metadata:
   namespace: blue-green
   annotations:
     argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   template:
     spec:
@@ -22,6 +23,7 @@ spec:
                 sleep 5
               done
               echo "Rollout completed successfully."
+              exit 0
           resources:
             limits:
               cpu: "100m"
