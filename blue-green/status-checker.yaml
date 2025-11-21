@@ -1,3 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: status-checker-job
+  namespace: blue-green
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  template:
+    spec:
+      serviceAccountName: status-checker-sa
+      containers:
+        - name: check-rollout
+          image: localhost/kubectl:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+            - |
+              until kubectl get rollout rollout-1 -n blue-green -o jsonpath='{.status.phase}' | grep -q 'Healthy'; do
+                echo "Waiting for rollout to complete..."
+                sleep 5
+              done
+              echo "Rollout completed successfully."
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "128Mi"
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+      restartPolicy: Never
+  backoffLimit: 4
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
