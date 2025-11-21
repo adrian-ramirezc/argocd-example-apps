@@ -3,8 +3,7 @@ kind: Rollout
 metadata:
   namespace: blue-green
   annotations:
-    # By default, the sync wave is 0, we need to set it to 1 to ensure that this resource is sync at last.
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "1"
   name: rollout-2
   labels:
     app: deployment-2
