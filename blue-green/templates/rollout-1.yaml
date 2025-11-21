@@ -14,7 +14,6 @@ spec:
   strategy:
     canary:
       steps:
-        - setWeight: 20
         - pause: { duration: 5s }
         - experiment:
             templates:
@@ -32,6 +31,7 @@ spec:
                     value: "deployment-1"
                   - name: canary
                     value: "some-value"
+        - pause: { duration: 2s }
         - setWeight: 100
   workloadRef:
     apiVersion: apps/v1
