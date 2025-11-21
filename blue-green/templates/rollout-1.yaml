@@ -30,6 +30,7 @@ spec:
                     value: "deployment-1"
                   - name: canary
                     value: "some-value"
+        - pause: {duration: 5s}
         - setWeight: 100
   workloadRef:
     apiVersion: apps/v1
