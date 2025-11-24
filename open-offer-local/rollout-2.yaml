@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   namespace: open-offer-local
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "1"
   name: soa-rollout
   labels:
     app: soa-deployment

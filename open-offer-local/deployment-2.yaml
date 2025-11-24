@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   namespace: open-offer-local
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "1"
   name: soa-deployment
   labels:
     app: soa-deployment
@@ -19,6 +19,6 @@ spec:
     spec:
       containers:
         - name: example-container
-          image: nginx:1.19.3
+          image: nginx:1.19.4
           ports:
             - containerPort: 80
