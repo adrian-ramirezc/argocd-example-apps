@@ -21,7 +21,7 @@ spec:
               all_healthy=false
               while [ "$all_healthy" = false ]; do
                 status=$(kubectl get rollout store-rollout -n open-offer-local -o jsonpath='{.status.phase}' 2>/dev/null)
-                if ["$status" = "Healthy" ]; then
+                if [ "$status" = "Healthy" ]; then
                   all_healthy=true
                 else
                   echo "Current rollout status: $status. Waiting for Healthy status..."
