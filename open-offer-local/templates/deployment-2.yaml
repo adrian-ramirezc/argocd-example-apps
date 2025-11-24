@@ -1,22 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: blue-green
-  name: deployment-1
+  namespace: open-offer-local
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: soa-deployment
   labels:
-    app: deployment-1
+    app: soa-deployment
 spec:
   replicas: 0
   selector:
     matchLabels:
-      app: deployment-1
+      app: soa-deployment
   template:
     metadata:
       labels:
-        app: deployment-1
+        app: soa-deployment
     spec:
       containers:
         - name: example-container
-          image: nginx:1.19.3
+          image: nginx:1.19.4
           ports:
             - containerPort: 80

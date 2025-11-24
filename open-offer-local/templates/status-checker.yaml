@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: status-checker-job
-  namespace: blue-green
+  namespace: open-offer-local
   annotations:
     argocd.argoproj.io/sync-wave: "1"
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
@@ -18,7 +18,8 @@ spec:
             - /bin/sh
             - -c
             - |
-              until kubectl get rollout rollout-1 -n blue-green -o jsonpath='{.status.phase}' | grep -q 'Healthy'; do
+              until kubectl get rollout store-rollout -n blue-green -o jsonpath='{.status.phase}' | grep -q 
+              'Healthy'; do
                 echo "Waiting for rollout to complete..."
                 sleep 5
               done
@@ -38,11 +39,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: status-checker-role-binding
-  namespace: blue-green
+  namespace: open-offer-local
 subjects:
   - kind: ServiceAccount
     name: status-checker-sa
-    namespace: blue-green
+    namespace: open-offer-local
 roleRef:
   kind: Role
   name: status-checker-role
@@ -52,7 +53,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: status-checker-role
-  namespace: blue-green
+  namespace: open-offer-local
 rules:
   - apiGroups: ["argoproj.io"]
     resources: ["rollouts"]
@@ -62,4 +63,4 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: status-checker-sa
-  namespace: blue-green
+  namespace: open-offer-local

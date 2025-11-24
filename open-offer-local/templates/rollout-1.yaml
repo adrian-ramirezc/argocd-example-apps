@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  namespace: blue-green
-  name: rollout-1
+  namespace: open-offer-local
+  name: store-rollout
   labels:
-    app: deployment-1
+    app: store-deployment
 spec:
   replicas: 10
   revisionHistoryLimit: 0
   selector:
     matchLabels:
-      app: deployment-1
+      app: store-deployment
   strategy:
     canary:
       steps:
@@ -28,7 +28,7 @@ spec:
                 requiredForCompletion: true
                 args:
                   - name: app-name
-                    value: "deployment-1"
+                    value: "store-deployment"
                   - name: canary
                     value: "some-value"
         - pause: { duration: 2s }
@@ -36,5 +36,5 @@ spec:
   workloadRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: deployment-1
+    name: store-deployment
     scaleDown: onsuccess

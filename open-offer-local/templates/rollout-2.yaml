@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  namespace: blue-green
+  namespace: open-offer-local
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-  name: rollout-2
+  name: soa-rollout
   labels:
-    app: deployment-2
+    app: soa-deployment
 spec:
   replicas: 5
   revisionHistoryLimit: 0
   selector:
     matchLabels:
-      app: deployment-2
+      app: soa-deployment
   strategy:
     canary:
       steps:
@@ -21,5 +21,5 @@ spec:
   workloadRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: deployment-2
+    name: soa-deployment
     scaleDown: onsuccess
