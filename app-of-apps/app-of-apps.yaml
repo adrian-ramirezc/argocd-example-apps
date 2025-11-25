@@ -6,6 +6,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  project: default
   source:
     path: app-of-apps/apps
     repoURL: 'https://github.com/adrian-ramirezc/argocd-example-apps.git'
@@ -13,4 +14,10 @@ spec:
   destination:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
-  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PruneLast=true
+      - ApplyOutOfSyncOnly=true
