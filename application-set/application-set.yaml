@@ -12,12 +12,12 @@ spec:
             - key: app.kubernetes.io/name
               operator: In
               values:
-                - "app1"
+                - app1
         - matchExpressions:
             - key: app.kubernetes.io/name
               operator: NotIn
               values:
-                - "app1"
+                - app1
   generators:
     - list:
         elements:
