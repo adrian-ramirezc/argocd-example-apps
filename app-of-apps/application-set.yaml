@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: open-offer-local-applicationset
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - name: app1
+            namespace: app1-ns
+            path: app1
+          - name: app2
+            namespace: app2-ns
+            path: app2
+  template:
+    metadata:
+      name: '{{name}}'
+      labels:
+        app.kubernetes.io/name: '{{name}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/adrian-ramirezc/argocd-example-apps.git
+        targetRevision: HEAD
+        path: 'app-of-apps/{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
