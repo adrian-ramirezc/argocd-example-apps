@@ -27,7 +27,7 @@ spec:
       source:
         repoURL: https://github.com/adrian-ramirezc/argocd-example-apps.git
         targetRevision: HEAD
-        path: 'app-of-apps/{{path}}'
+        path: 'application-set/{{path}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{namespace}}'
