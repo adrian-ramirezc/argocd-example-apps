@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: example-container
-          image: nginx:1.19.3
+          image: nginx:1.19.4
           ports:
             - containerPort: 80
