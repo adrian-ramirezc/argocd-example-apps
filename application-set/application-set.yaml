@@ -4,24 +4,34 @@ metadata:
   name: open-offer-local-applicationset
   namespace: argocd
 spec:
+  strategy:
+    type: RollingSync
+    rollingSync:
+      steps:
+        - matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+                - "app1"
+        - matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: NotIn
+              values:
+                - "app1"
   generators:
     - list:
         elements:
           - name: app1
             namespace: app1-ns
             path: app1
-            wave: "-1"
           - name: app2
             namespace: app2-ns
             path: app2
-            wave: "0"
   template:
     metadata:
       name: '{{name}}'
       labels:
         app.kubernetes.io/name: '{{name}}'
-      annotations:
-        argocd.argoproj.io/sync-wave: '{{wave}}'
     spec:
       project: default
       source:
