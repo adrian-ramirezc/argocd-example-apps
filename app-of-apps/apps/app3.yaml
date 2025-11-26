@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app1
-  namespace: app1-ns
+  name: app3
+  namespace: app3-ns
   labels:
-    app.kubernetes.io/name: app1
+    app.kubernetes.io/name: app3
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
@@ -15,10 +15,10 @@ spec:
     path: 'app'
     helm:
       valueFiles:
-        - 'app1/values.yaml'
+        - 'app3/values.yaml'
   destination:
     server: https://kubernetes.default.svc
-    namespace: app1-ns
+    namespace: app3-ns
   syncPolicy:
     automated:
       prune: true
