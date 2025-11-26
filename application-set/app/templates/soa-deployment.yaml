@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: app1-ns
+  namespace: {{ .Values.app.name }}-ns
   annotations:
     argocd.argoproj.io/sync-wave: "2"
   name: soa-deployment

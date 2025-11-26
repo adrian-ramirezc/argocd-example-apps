@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  namespace: app1-ns
+  namespace: {{ .Values.app.name }}-ns
   name: store-rollout
   labels:
     app: store-deployment

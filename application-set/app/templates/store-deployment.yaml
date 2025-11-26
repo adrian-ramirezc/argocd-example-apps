@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: app1-ns
+  namespace: {{ .Values.app.name }}-ns
   name: store-deployment
   labels:
     app: store-deployment

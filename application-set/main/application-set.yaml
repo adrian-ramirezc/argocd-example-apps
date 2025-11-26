@@ -8,7 +8,7 @@ spec:
     - list:
         elements:
           - name: app1
-            path: app
+            path: app/app1
           - name: app2
             path: app2
   strategy:

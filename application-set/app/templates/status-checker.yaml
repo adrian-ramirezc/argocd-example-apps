@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: status-checker-job
-  namespace: app1-ns
+  namespace: {{ .Values.app.name }}-ns
   annotations:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: "1"
@@ -19,9 +19,10 @@ spec:
             - /bin/sh
             - -c
             - |
+              {{- $ns := printf "%s-ns" .Values.app.name }}
               all_healthy=false
               while [ "$all_healthy" = false ]; do
-                status=$(kubectl get rollout store-rollout -n app1-ns -o jsonpath='{.status.phase}' 2>/dev/null)
+                status=$(kubectl get rollout store-rollout -n "{{ $ns }}" -o jsonpath='{.status.phase}' 2>/dev/null)
                 if [ "$status" = "Healthy" ]; then
                   all_healthy=true
                 else
