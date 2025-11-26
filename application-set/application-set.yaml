@@ -1,11 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: open-offer-local-applicationset
+  name: app-set-rolling-sync
   namespace: argocd
 spec:
+  generators:
+    - list:
+        elements:
+          - name: app1
+          - name: app2
   strategy:
     type: RollingSync
+    deletionOrder: Reverse
     rollingSync:
       steps:
         - matchExpressions:
@@ -18,16 +24,10 @@ spec:
               operator: NotIn
               values:
                 - app1
-  generators:
-    - list:
-        elements:
-          - name: app1
-          - name: app2
   template:
     metadata:
       name: '{{name}}'
       labels:
-        application.set/name: open-offer-local-applicationset
         app.kubernetes.io/name: '{{name}}'
     spec:
       project: default
@@ -38,10 +38,3 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{name}}-ns'
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:
-          - PruneLast=true
-          - ApplyOutOfSyncOnly=true
