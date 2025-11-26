@@ -2,6 +2,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: app-set-rolling-sync
+  labels:
+    app.kubernetes.io/part-of: app-set-rolling-sync
   namespace: argocd
 spec:
   generators:
