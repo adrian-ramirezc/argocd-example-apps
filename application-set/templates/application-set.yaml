@@ -9,6 +9,8 @@ spec:
         elements:
           - name: app1
           - name: app2
+          - name: app3
+          - name: app4
   strategy:
     type: RollingSync
     deletionOrder: Reverse
@@ -21,9 +23,9 @@ spec:
                 - app1
         - matchExpressions:
             - key: app.kubernetes.io/name
-              operator: In
+              operator: NotIn
               values:
-                - app2
+                - app1
   template:
     metadata:
       name: '{{name}}'
