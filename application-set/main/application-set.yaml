@@ -8,9 +8,7 @@ spec:
     - list:
         elements:
           - name: app1
-            path: app/app1
           - name: app2
-            path: app2
   strategy:
     type: RollingSync
     deletionOrder: Reverse
@@ -36,7 +34,7 @@ spec:
       source:
         repoURL: https://github.com/adrian-ramirezc/argocd-example-apps.git
         targetRevision: HEAD
-        path: 'application-set/{{name}}'
+        path: 'application-set/app/{{name}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{name}}-ns'
