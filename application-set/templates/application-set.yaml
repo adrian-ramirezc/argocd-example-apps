@@ -8,35 +8,29 @@ spec:
     - list:
         elements:
           - name: app1
-            wave: "-1"
           - name: app2
-            wave: "0"
           - name: app3
-            wave: "1"
           - name: app4
-            wave: "2"
-#  strategy:
-#    type: RollingSync
-#    deletionOrder: Reverse
-#    rollingSync:
-#      steps:
-#        - matchExpressions:
-#            - key: app.kubernetes.io/name
-#              operator: In
-#              values:
-#                - app1
-#        - matchExpressions:
-#            - key: app.kubernetes.io/name
-#              operator: NotIn
-#              values:
-#                - app1
+  strategy:
+    type: RollingSync
+    deletionOrder: Reverse
+    rollingSync:
+      steps:
+        - matchExpressions:
+            - key: "app.kubernetes.io/name"
+              operator: In
+              values:
+                - app1
+        - matchExpressions:
+            - key: "app.kubernetes.io/name"
+              operator: NotIn
+              values:
+                - app1
   template:
     metadata:
       name: '{{name}}'
       labels:
         app.kubernetes.io/name: '{{name}}'
-      annotations:
-        argocd.argoproj.io/sync-wave: '{{wave}}'
     spec:
       project: default
       source:
