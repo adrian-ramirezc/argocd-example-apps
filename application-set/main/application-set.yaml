@@ -21,15 +21,14 @@ spec:
                 - app1
         - matchExpressions:
             - key: app.kubernetes.io/name
-              operator: NotIn
+              operator: In
               values:
-                - app1
+                - app2
   template:
     metadata:
       name: '{{name}}'
       labels:
         app.kubernetes.io/name: '{{name}}'
-        some.label: some-value
     spec:
       project: default
       source:
