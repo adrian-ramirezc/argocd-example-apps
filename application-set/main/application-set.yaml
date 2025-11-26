@@ -29,6 +29,7 @@ spec:
       name: '{{name}}'
       labels:
         app.kubernetes.io/name: '{{name}}'
+        last-updated: 'now'
     spec:
       project: default
       source:
