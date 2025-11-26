@@ -34,7 +34,10 @@ spec:
       source:
         repoURL: https://github.com/adrian-ramirezc/argocd-example-apps.git
         targetRevision: HEAD
-        path: 'application-set/app/{{name}}'
+        path: 'app'
+        helm:
+          valueFiles:
+            - '{{name}}/values.yaml'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{name}}-ns'
