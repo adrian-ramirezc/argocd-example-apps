@@ -8,7 +8,9 @@ spec:
     - list:
         elements:
           - name: app1
+            path: app
           - name: app2
+            path: app2
   strategy:
     type: RollingSync
     deletionOrder: Reverse
