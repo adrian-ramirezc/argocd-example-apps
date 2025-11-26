@@ -30,7 +30,7 @@ spec:
     metadata:
       name: '{{name}}'
       labels:
-        app.kubernetes.io/name: '{{name}}'
+        app.kubernetes.io/name: '{{name}}-app'
     spec:
       project: default
       source:
