@@ -29,7 +29,6 @@ spec:
       name: '{{name}}'
       labels:
         app.kubernetes.io/name: '{{name}}'
-        some-label: some-other-value
     spec:
       project: default
       source:
