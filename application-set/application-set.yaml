@@ -22,11 +22,7 @@ spec:
     - list:
         elements:
           - name: app1
-            namespace: app1-ns
-            path: app1
           - name: app2
-            namespace: app2-ns
-            path: app2
   template:
     metadata:
       name: '{{name}}'
@@ -37,10 +33,10 @@ spec:
       source:
         repoURL: https://github.com/adrian-ramirezc/argocd-example-apps.git
         targetRevision: HEAD
-        path: 'application-set/{{path}}'
+        path: 'application-set/{{name}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{namespace}}'
+        namespace: '{{name}}-ns'
       syncPolicy:
         automated:
           prune: true
