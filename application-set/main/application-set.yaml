@@ -38,3 +38,7 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{name}}-ns'
+      syncPolicy:
+        syncOptions:
+          - PruneLast=true
+          - ApplyOutOfSyncOnly=true
