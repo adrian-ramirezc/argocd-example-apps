@@ -27,6 +27,7 @@ spec:
     metadata:
       name: '{{name}}'
       labels:
+        application.set/name: open-offer-local-applicationset
         app.kubernetes.io/name: '{{name}}'
     spec:
       project: default
